@@ -41,6 +41,8 @@ public class PostsFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     protected List<Post> allPosts;
 
+    //private EndlessRecyclerViewScrollListener scrollListener;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

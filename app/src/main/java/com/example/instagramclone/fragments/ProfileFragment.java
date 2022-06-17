@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.instagramclone.LoginActivity;
 import com.example.instagramclone.Post;
 import com.example.instagramclone.R;
@@ -25,7 +28,9 @@ import java.util.List;
 
 public class ProfileFragment extends PostsFragment{
     private static final String TAG = "ProfileFragment";
-    private Button logout;
+    private Button logout,changeProfilePicture;
+    private TextView usernameOnProfile;
+    private ImageView profilePictureonProfile;
     private SwipeRefreshLayout swipeContainer;
     @Override
     public void queryPosts() {
@@ -60,7 +65,17 @@ public class ProfileFragment extends PostsFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+
+
+        usernameOnProfile = view.findViewById(R.id.usernameOnProfile);
+        profilePictureonProfile= view.findViewById(R.id.profilePictureOnProfile);
+       // IMPLEMENT
+        // Glide.with(getContext()).load(ParseUser.getCurrentUser().getP.getUrl()).into(ProfilePicture);
+
+        usernameOnProfile.setText(ParseUser.getCurrentUser().getUsername());
         logout = view.findViewById(R.id.logout);
+
+        changeProfilePicture = view.findViewById(R.id.changeProfilePicture);
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +85,18 @@ public class ProfileFragment extends PostsFragment{
                 logoutUser();
             }
         });
+        changeProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick changeProfilePicture button");
+              //  changeProfilePicture();
+            }
+        });
+    }
+
+    //IMPLEMENT
+    public void changeProfilePicture(){
+        //ParseUser.getCurrentUser().setProfilePicture();
     }
 
     @Override

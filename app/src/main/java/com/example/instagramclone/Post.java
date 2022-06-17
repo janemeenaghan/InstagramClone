@@ -40,10 +40,10 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-   /* public ParseFile getProfileImage(){
-        return getParseUser(KEY_USER).get(KEY_PROFILEIMAGE);
-    }
-*/
+    /*public ParseFile getProfileImage(){
+        return getParseUser(KEY_USER).(KEY_PROFILEIMAGE);
+    }*/
+
 
 
     public static String calculateTimeAgo(Date createdAt) {

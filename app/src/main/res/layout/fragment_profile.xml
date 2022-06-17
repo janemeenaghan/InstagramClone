@@ -7,28 +7,76 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="123dp"
         android:paddingBottom="200dp">
-
 
 
     </FrameLayout>
 
     <Button
+        android:id="@+id/changeProfilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/swipeContainer"
+        android:layout_alignParentLeft="true"
+        android:backgroundTintMode="add"
+        android:insetRight="50dp"
+        android:text="Change" />
+    <TextView
+        android:id="@+id/usernameOnProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
         android:id="@+id/logout"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="Logout" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="23dp"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        app:icon="@drawable/signouttwo"
+        app:iconTint="#FFFFFF"
+        app:iconTintMode="src_in"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="93dp"
+        android:layout_height="89dp"
+        app:cardCornerRadius="45dp"
+        android:layout_margin="5dp"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/profilePictureOnProfile"
+            android:layout_width="93dp"
+            android:layout_height="89dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:layout_below="@+id/flContainer"
         tools:context=".FeedActivity">
 

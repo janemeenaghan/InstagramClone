@@ -1,6 +1,7 @@
 package com.example.instagramclone;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             tvCreatedAt.setText(post.calculateTimeAgo(post.getCreatedAt()));
+
+            //CHANGE THIS
+            ParseFile PLACEHOLDER = post.getImage();
+            if (PLACEHOLDER != null) {
+                Glide.with(context).load(PLACEHOLDER.getUrl()).into(ProfilePicture);
+            }
+
+
+
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
