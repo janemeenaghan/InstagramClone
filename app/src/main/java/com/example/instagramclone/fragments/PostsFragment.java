@@ -31,7 +31,7 @@ public class PostsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static final int increment = 20;
     private static final String TAG = "PostsFragment";
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -94,8 +94,6 @@ public class PostsFragment extends Fragment {
         rvPosts.setAdapter(adapter);
         // set the layout manager on the recycler view
         queryPosts();
-
-
     }
 
     //GET HELP
@@ -104,7 +102,39 @@ public class PostsFragment extends Fragment {
         //  --> Send the request including an offset value (i.e `page`) as a query parameter.
         //  --> Deserialize and construct new model objects from the API response
         //  --> Append the new data objects to the existing set of items inside the array of items
-        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
+        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()
+        // specify what type of data we want to query - Post.class
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        // include data referred by user key
+        query.include(Post.KEY_USER);
+        // limit query to latest 20 items
+        query.setLimit(increment+offset);
+        // order posts by creation date (newest first)
+        query.addDescendingOrder(Post.KEY_CREATED_AT);
+        // start an asynchronous call for posts
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+
+                }
+
+                for (int i = 0 ; i < increment; i ++){
+                    if (posts.size() > i+allPosts.size()) {
+                        allPosts.add(posts.get(i + allPosts.size()));
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
     }
 
 
@@ -153,7 +183,7 @@ public class PostsFragment extends Fragment {
         // include data referred by user key
         query.include(Post.KEY_USER);
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(increment);
         // order posts by creation date (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
         // start an asynchronous call for posts

@@ -25,20 +25,18 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.instagramclone.FeedActivity;
-import com.example.instagramclone.LoginActivity;
-import com.example.instagramclone.MainActivity;
 import com.example.instagramclone.Post;
 import com.example.instagramclone.R;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.File;
-import java.util.List;
+import java.lang.reflect.Array;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -138,7 +136,11 @@ public class ComposeFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile, pb);
+                try {
+                    savePost(description, currentUser, photoFile, pb);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -160,9 +162,6 @@ public class ComposeFragment extends Fragment {
 
 
 
-    public void toFeed(){
-        startActivity(new Intent(getContext(), FeedActivity.class));
-    }
 
 
 
@@ -227,11 +226,14 @@ public class ComposeFragment extends Fragment {
 
 
 
-    private void savePost(String description, ParseUser currentUser, File photoFile, ProgressBar pb) {
+    private void savePost(String description, ParseUser currentUser, File photoFile, ProgressBar pb) throws JSONException {
         Post post = new Post();
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
+        String array2[] = new String[1];
+        array2[0] = ParseUser.getCurrentUser().getObjectId();
+        post.put("likes",new JSONArray(array2));
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

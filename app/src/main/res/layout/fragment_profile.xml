@@ -8,17 +8,28 @@
     android:orientation="horizontal">
 
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
-        android:layout_height="123dp"
+        android:layout_height="157dp"
+        tools:context=".MainActivity">
         android:paddingBottom="200dp">
 
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/usernameOnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#673AB7"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="7dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/changeProfilePicture"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/swipeContainer"
@@ -26,48 +37,40 @@
         android:backgroundTintMode="add"
         android:insetRight="50dp"
         android:text="Change" />
-    <TextView
-        android:id="@+id/usernameOnProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="username"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="77dp"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="32dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="23dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="116dp"
         android:paddingStart="8dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingEnd="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"
-        app:icon="@drawable/signouttwo"
-        app:iconTint="#FFFFFF"
+        app:icon="@drawable/ic_signout"
         app:iconTintMode="src_in"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="93dp"
-        android:layout_height="89dp"
-        app:cardCornerRadius="45dp"
-        android:layout_margin="5dp"
-        android:elevation="10dp">
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="35dp">
 
         <ImageView
             android:id="@+id/profilePictureOnProfile"
-            android:layout_width="93dp"
-            android:layout_height="89dp"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
 
@@ -77,8 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_below="@+id/flContainer"
-        tools:context=".FeedActivity">
+        android:layout_below="@+id/flContainer">
 
 
         <androidx.recyclerview.widget.RecyclerView

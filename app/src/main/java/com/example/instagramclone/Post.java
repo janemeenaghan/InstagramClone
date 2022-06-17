@@ -1,20 +1,27 @@
 package com.example.instagramclone;
 
 import android.util.Log;
+import android.widget.RatingBar;
 
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
-import java.util.Date;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.parceler.Parcel;
 
+import java.lang.reflect.Array;
+import java.util.Date;
+@Parcel(analyze= Post.class)
 @ParseClassName("Post")
 public class Post extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_IMAGE = "image";
-    public static final String KEY_PROFILEIMAGE = "profileImage";
     public static final String KEY_USER = "user";
+    public static final String KEY_LIKES = "likes";
+    public static final String KEY_COMMENTS = "comments";
 
 
     public String getDescription(){
@@ -40,10 +47,77 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    /*public ParseFile getProfileImage(){
-        return getParseUser(KEY_USER).(KEY_PROFILEIMAGE);
-    }*/
+    public JSONArray getLikes(){
+        return getJSONArray(KEY_LIKES);
+    }
+    public int getLikesCount(){
+        return getLikes().length();
+    }
 
+    public boolean isLiked(){
+        boolean containsUserLike = false;
+        JSONArray array1 = getJSONArray(KEY_LIKES);
+        for (int i = 0 ; i < array1.length() ; i ++){
+            try {
+                if (array1.get(i).toString().equals(ParseUser.getCurrentUser().getObjectId())){
+                    containsUserLike = true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return containsUserLike;
+    }
+
+    public void likeButtonClicked() throws JSONException {
+        if (isLiked()){
+            removeALike();
+        }
+        else{
+            addALike();
+        }
+    }
+    public void addALike() throws JSONException {
+        JSONArray array1 = getJSONArray(KEY_LIKES);
+        JSONArray array2 = new JSONArray(array1.length()+1);
+        for (int i = 0 ; i < array2.length() ; i ++){
+            array2.put(array1.get(i));
+        }
+        array2.put(ParseUser.getCurrentUser().getObjectId());
+        put(KEY_LIKES, array2);
+
+        //put(KEY_LIKES,ParseUser.getCurrentUser().getObjectId());
+                //(Number)((int)(getNumber(KEY_LIKES))+1));
+    }
+    public void removeALike() throws JSONException {
+        JSONArray array1 = getJSONArray(KEY_LIKES);
+        JSONArray array2 = new JSONArray(array1.length()-1);
+        for (int i = 0 ; i < array2.length() ; i ++){
+            if (array1.get(i) != ParseUser.getCurrentUser().getObjectId()){
+                array2.put(array1.get(i));
+            }
+        }
+        put(KEY_LIKES, array2);
+                //(KEY_LIKES,(Number)((int)(getNumber(KEY_LIKES))-1));
+    }
+/*
+
+    public JSONArray getComments(){
+        return getJSONArray(KEY_COMMENTS);
+    }
+    public void addAComment(String comment) throws JSONException {
+       /* JSONArray comments = getJSONArray(KEY_COMMENTS);
+        JSONArray comments2 = new JSONArray(comments.length()+1);
+        for (int i = 0 ; i < comments.length(); i ++){
+            comments2.put(comments.get(i));
+        }
+        comments2.put(comment);
+
+        put(KEY_COMMENTS, comments2);
+
+        // OR
+        //  put(KEY_COMMENTS,comment);
+    }*/
 
 
     public static String calculateTimeAgo(Date createdAt) {

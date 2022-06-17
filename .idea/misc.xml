@@ -11,11 +11,12 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2942081806822593" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3433441162109375" />
         <entry key="app/src/main/res/layout/activity_newmain.xml" value="0.3888888888888889" />
+        <entry key="app/src/main/res/layout/activity_post_details.xml" value="0.23902180989583333" />
         <entry key="app/src/main/res/layout/activity_timeline.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.20421600341796878" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.3235382080078126" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.32484741210937507" />
-        <entry key="app/src/main/res/layout/item_post.xml" value="0.41206054687500004" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.32394104003906254" />
+        <entry key="app/src/main/res/layout/item_post.xml" value="0.32974853515624997" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.1" />
       </map>
@@ -30,7 +31,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.41206054687500004" />
+        <option name="scale" value="0.32974853515624997" />
       </ProjectState>
     </option>
   </component>
