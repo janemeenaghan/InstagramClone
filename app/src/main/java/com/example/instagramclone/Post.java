@@ -13,6 +13,7 @@ import java.util.Date;
 public class Post extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_IMAGE = "image";
+    public static final String KEY_PROFILEIMAGE = "profileImage";
     public static final String KEY_USER = "user";
 
 
@@ -39,6 +40,10 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
+   /* public ParseFile getProfileImage(){
+        return getParseUser(KEY_USER).get(KEY_PROFILEIMAGE);
+    }
+*/
 
 
     public static String calculateTimeAgo(Date createdAt) {

@@ -23,54 +23,21 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class FeedActivity extends AppCompatActivity {
-    protected PostsAdapter adapter;
-    private SwipeRefreshLayout swipeContainer;
-    protected List<Post> allPosts;
-    private RecyclerView rvPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        rvPosts = findViewById(R.id.rvPosts);
-        allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(this, allPosts);
-
-
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                fetchTimelineAsync(0);
-            }
-        });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+      // rvPosts = findViewById(R.id.rvPosts);
 
 
 
-        // set the adapter on the recycler view
-        rvPosts.setAdapter(adapter);
-        // set the layout manager on the recycler view
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
-        // query posts from Parstagram
-        queryPosts();
+     //   });
+
     }
 
-    public void fetchTimelineAsync(int page) {
-        queryPosts();
-        adapter.clear();
-        adapter.addAll(allPosts);
-        swipeContainer.setRefreshing(false);
-    }
 
+/*
     private void queryPosts() {
         // specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
@@ -96,12 +63,11 @@ public class FeedActivity extends AppCompatActivity {
                 }
 
                 // save received posts to list and notify adapter of new data
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+
             }
         });
     }
-
+*/
 
 
 
