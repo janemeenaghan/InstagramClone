@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +10,19 @@
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigation" />
+        android:layout_above="@id/bottomNavigation">
+
+        <ProgressBar
+            android:id="@+id/miActionProgress"
+            android:layout_width="62dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="350dp"
+            android:orderInCategory="100"
+            android:title="Loading..."
+            android:visible="false"
+            app:actionLayout="@layout/action_view_progress"
+            app:showAsAction="always" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

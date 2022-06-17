@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.instagramclone.FeedActivity;
@@ -89,6 +90,7 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -97,11 +99,14 @@ public class ComposeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         btnCaptureImage = view.findViewById(R.id.takePicture);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.submit);
         etDescription = view.findViewById(R.id.description);
+
+
 
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
@@ -114,9 +119,14 @@ public class ComposeFragment extends Fragment {
 
         //queryPosts();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                ProgressBar pb = (ProgressBar) view.findViewById(R.id.miActionProgress);
+                pb.setVisibility(ProgressBar.VISIBLE);
                 Log.i(TAG, "onClick btnSubmit button");
+
+
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
@@ -126,8 +136,9 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "There is no image!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                savePost(description, currentUser, photoFile, pb);
             }
         });
 
@@ -216,7 +227,7 @@ public class ComposeFragment extends Fragment {
 
 
 
-    private void savePost(String description, ParseUser currentUser, File photoFile) {
+    private void savePost(String description, ParseUser currentUser, File photoFile, ProgressBar pb) {
         Post post = new Post();
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
@@ -232,7 +243,7 @@ public class ComposeFragment extends Fragment {
                 Log.i(TAG, "Post save was successful!!");
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
-
+                //pb.setVisibility(ProgressBar.VISIBLE);
 
             }
         });
