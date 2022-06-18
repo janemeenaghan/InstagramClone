@@ -88,6 +88,7 @@ public class Post extends ParseObject {
 
         //put(KEY_LIKES,ParseUser.getCurrentUser().getObjectId());
                 //(Number)((int)(getNumber(KEY_LIKES))+1));
+        saveInBackground();
     }
     public void removeALike() throws JSONException {
         JSONArray array1 = getJSONArray(KEY_LIKES);
@@ -98,6 +99,7 @@ public class Post extends ParseObject {
             }
         }
         put(KEY_LIKES, array2);
+        saveInBackground();
                 //(KEY_LIKES,(Number)((int)(getNumber(KEY_LIKES))-1));
     }
 /*
